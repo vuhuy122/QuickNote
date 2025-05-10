@@ -1,6 +1,7 @@
 import React from "react";
-import { Text, TextProps, TextStyle } from "react-native";
+import { Platform, Text, TextProps, TextStyle } from "react-native";
 import { COLORS } from "../constants/colors";
+import { scale } from "../utils/scale";
 
 interface TextCustomProps extends TextProps {
   children: React.ReactNode;

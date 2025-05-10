@@ -35,7 +35,13 @@ const Button: React.FC<ButtonProps> = ({
         end={{ x: 1, y: 0.2 }}
         style={styles.buttonGradient}
       >
-        <TextCustom weight="bold" style={[...(buttonText ? [buttonText] : [])]}>
+        <TextCustom
+          weight="bold"
+          style={[
+            ...(buttonText ? [buttonText] : []),
+            { lineHeight: scale(18) },
+          ]}
+        >
           {children}
         </TextCustom>
       </LinearGradient>

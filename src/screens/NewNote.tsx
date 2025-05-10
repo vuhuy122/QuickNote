@@ -117,9 +117,11 @@ const styles = StyleSheet.create({
     minHeight: scale(150),
     marginTop: scale(16),
   },
+
   saveButtonTouchable: {
     borderRadius: 99,
     overflow: "hidden",
     flex: 0.4,
+    fontSize: scale(14),
   },
 });

@@ -19,6 +19,7 @@ import TextCustom from "./TextCustom";
 import { Image } from "expo-image";
 import { generalIcon } from "../assets/Images";
 import { COLORS } from "../constants/colors";
+import BlurViewBase from "./BlurViewBase";
 
 // Định nghĩa interface cho props
 interface DropdownProps {
@@ -84,9 +85,8 @@ const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <BlurView
+      <BlurViewBase
         intensity={42}
-        tint="dark"
         style={[styles.dropdownHeader, dropdownHeaderStyle]}
       >
         <TouchableOpacity
@@ -124,11 +124,11 @@ const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
             />
           </Animated.View>
         </TouchableOpacity>
-      </BlurView>
+      </BlurViewBase>
       <Animated.View
         style={[styles.dropdownContent, animatedStyle, dropdownContentStyle]}
       >
-        <BlurView
+        <BlurViewBase
           intensity={42}
           tint="dark"
           style={[styles.blurView, blurViewStyle]}
@@ -146,7 +146,7 @@ const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
               </TextCustom>
             </TouchableOpacity>
           ))}
-        </BlurView>
+        </BlurViewBase>
       </Animated.View>
     </View>
   );
@@ -162,7 +162,6 @@ const styles = StyleSheet.create({
   },
   dropdownHeader: {
     padding: scale(16),
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
   },
   headerContainer: {
     flexDirection: "row",
@@ -172,6 +171,7 @@ const styles = StyleSheet.create({
   headerText: {
     color: "#fff",
     fontSize: scale(14),
+    lineHeight: scale(16),
   },
   dropdownContent: {
     borderRadius: 5,

@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { scale } from "../utils/scale";
@@ -110,5 +116,6 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
     fontSize: scale(24),
+    top: Platform.OS === "android" ? scale(-2) : 0,
   },
 });

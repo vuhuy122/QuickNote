@@ -51,7 +51,7 @@ export default function Settings() {
       <Header title="Settings" isShowBackBtn />
       <View style={{ gap: scale(16), marginTop: scale(30), padding: scale(8) }}>
         {featureSettings?.map((item) => (
-          <BlurViewBase style={styles.blurView}>
+          <BlurViewBase style={styles.blurView} key={item.icon}>
             <View
               style={{
                 flexDirection: "row",

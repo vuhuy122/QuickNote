@@ -17,19 +17,19 @@ export default function MainStackNavigation() {
       ? {
           presentation: "card",
           statusBarHidden: true,
-          animation: "slide_from_bottom",
+          animation: "slide_from_right",
           gestureEnabled: true,
         }
       : { presentation: "card" };
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {/* Main app tab navigation with modal presentation */}
+      {/* Main app tab navigation without animation */}
       <Stack.Screen
         name={ROUTER_NAMES.MY_TAB}
         component={MyTabs}
         options={{
-          ...configModalAndroid,
+          animation: "none", // Tắt animation cho màn hình chính
         }}
       />
       <Stack.Screen

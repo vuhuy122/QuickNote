@@ -1,4 +1,11 @@
-import { View, Text, StyleProp, ViewStyle, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleProp,
+  ViewStyle,
+  StyleSheet,
+  Platform,
+} from "react-native";
 import React from "react";
 import { BlurView, BlurViewProps } from "expo-blur";
 import { scale } from "../utils/scale";
@@ -11,7 +18,7 @@ const BlurViewBase: React.FC<BlurViewProps> = ({
   children,
   intensity = 42,
   style,
-  tint = "dark",
+  tint = Platform.OS === "android" ? "systemChromeMaterialDark" : "dark",
 }) => {
   return (
     <BlurView
