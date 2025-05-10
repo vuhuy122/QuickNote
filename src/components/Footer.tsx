@@ -1,15 +1,7 @@
-import React from "react";
-import {
-  TouchableOpacity,
-  StyleSheet,
-  ViewStyle,
-  TextStyle,
-  View,
-} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import TextCustom from "./TextCustom"; // Adjust the import according to your project
+import React from "react";
+import { StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import { scale, width } from "../utils/scale";
-import Button from "./Button";
 
 // Define the types for the props
 interface FooterProps {

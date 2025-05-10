@@ -39,8 +39,8 @@ const Button: React.FC<ButtonProps> = ({
         <TextCustom
           weight="bold"
           style={[
+            { lineHeight: scale(18), fontSize: scale(14) },
             ...(buttonText ? [buttonText] : []),
-            { lineHeight: scale(18) },
           ]}
         >
           {children}

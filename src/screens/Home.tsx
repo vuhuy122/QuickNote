@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
   },
   recentTitle: {
     color: COLORS.white_opacity,
+    fontSize: scale(16),
   },
   categoryList: {
     marginTop: scale(10),

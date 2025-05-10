@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     color: COLORS.white,
+    fontSize: scale(14),
   },
 });
 

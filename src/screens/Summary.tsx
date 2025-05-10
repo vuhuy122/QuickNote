@@ -11,6 +11,7 @@ import TextCustom from "../components/TextCustom";
 import { CATEGORY_META } from "../constants/categories";
 import { RootState } from "../store";
 import { scale } from "../utils/scale";
+import { COLORS } from "../constants/colors";
 
 export default function Summary() {
   const insets = useSafeAreaInsets();
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: scale(24),
-    color: "#fff",
+    color: COLORS.white,
     marginLeft: scale(24),
     marginTop: scale(17),
   },
