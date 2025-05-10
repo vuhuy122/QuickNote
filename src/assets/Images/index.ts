@@ -41,3 +41,15 @@ export const summary = {
   icon_health_and_wellness,
   icon_home_life,
 };
+
+const icon_about = require("./settings/icon_about.png");
+const icon_call_center = require("./settings/icon_call_center.png");
+const icon_agreement = require("./settings/icon_agreement.png");
+const icon_policy = require("./settings/icon_policy.png");
+
+export const settings_icon = {
+  icon_call_center,
+  icon_about,
+  icon_agreement,
+  icon_policy,
+};

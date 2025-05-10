@@ -14,11 +14,11 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { BlurView } from "expo-blur";
-
 import { scale } from "../utils/scale";
 import TextCustom from "./TextCustom";
 import { Image } from "expo-image";
 import { generalIcon } from "../assets/Images";
+import { COLORS } from "../constants/colors";
 
 // Định nghĩa interface cho props
 interface DropdownProps {
@@ -30,6 +30,8 @@ interface DropdownProps {
   itemStyle?: StyleProp<ViewStyle>;
   itemTextStyle?: StyleProp<TextStyle>;
   categories?: string[];
+  onSelect?: (selectedValue: string) => void;
+  defaultValue?: string;
 }
 
 const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
@@ -41,15 +43,30 @@ const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
   itemStyle,
   itemTextStyle,
   categories = [],
+  onSelect,
+  defaultValue,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedValue, setSelectedValue] = useState<string>(
+    defaultValue || ""
+  );
   const height = useSharedValue<number>(0);
   const rotate = useSharedValue<number>(0);
 
   const toggleDropdown = (): void => {
-    height.value = isOpen ? withTiming(0) : withTiming(120);
+    height.value = isOpen
+      ? withTiming(0)
+      : withTiming(categories.length * scale(40)); // Điều chỉnh chiều cao dựa trên số item
     rotate.value = isOpen ? withTiming(0) : withTiming(180);
     setIsOpen(!isOpen);
+  };
+
+  const handleSelect = (item: string): void => {
+    setSelectedValue(item);
+    if (onSelect) {
+      onSelect(item);
+    }
+    toggleDropdown();
   };
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -61,7 +78,7 @@ const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
 
   const arrowStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ rotate: `${rotate.value}deg` }],
+      transform: [{ rotate: `${rotate.value - 90}deg` }],
     };
   });
 
@@ -76,21 +93,33 @@ const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
           onPress={toggleDropdown}
           style={styles.headerContainer}
         >
-          <TextCustom
-            style={[
-              styles.headerText,
-              ...(headerTextStyle ? [headerTextStyle] : []),
-            ]}
-          >
-            Choose a category
-          </TextCustom>
+          {!!selectedValue ? (
+            <TextCustom
+              style={[
+                styles.headerText,
+                ...(headerTextStyle ? [headerTextStyle] : []),
+              ]}
+            >
+              {selectedValue}
+            </TextCustom>
+          ) : (
+            <TextCustom
+              style={[
+                styles.headerText,
+                {
+                  color: COLORS.white_opacity,
+                },
+              ]}
+            >
+              Choose a category
+            </TextCustom>
+          )}
           <Animated.View style={arrowStyle}>
             <Image
               source={generalIcon.icon_arrow}
               style={{
                 width: scale(8),
                 height: scale(16),
-                transform: [{ rotate: "-90deg" }],
               }}
             />
           </Animated.View>
@@ -108,9 +137,13 @@ const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
             <TouchableOpacity
               key={index}
               style={[styles.item, itemStyle]}
-              onPress={() => console.log(`Selected: ${item}`)}
+              onPress={() => handleSelect(item)}
             >
-              <Text style={[styles.itemText, itemTextStyle]}>{item}</Text>
+              <TextCustom
+                style={StyleSheet.flatten([styles.itemText, itemTextStyle])}
+              >
+                {item}
+              </TextCustom>
             </TouchableOpacity>
           ))}
         </BlurView>
@@ -122,11 +155,14 @@ const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
 const styles = StyleSheet.create({
   container: {
     marginTop: scale(16),
+    borderRadius: scale(16),
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.12)",
   },
   dropdownHeader: {
     padding: scale(16),
     backgroundColor: "rgba(255, 255, 255, 0.08)",
-    borderRadius: scale(16),
   },
   headerContainer: {
     flexDirection: "row",
