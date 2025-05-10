@@ -41,7 +41,7 @@
 - **expo-image**: Image rendering
 - **react-navigation**: Screen navigation
 - **@react-native-async-storage/async-storage**: Local storage
-- **@react-native-community/blur**: BlurView effect
+- **expo-blur**: BlurView effect
 - **TypeScript**: Static typing
 
 ## Features
