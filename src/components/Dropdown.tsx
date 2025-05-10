@@ -191,6 +191,7 @@ const styles = StyleSheet.create({
   itemText: {
     color: COLORS.white,
     fontSize: scale(14),
+    lineHeight: scale(16),
   },
 });
 
