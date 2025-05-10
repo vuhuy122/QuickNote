@@ -1,26 +1,24 @@
-// src/store/index.ts
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { configureStore } from "@reduxjs/toolkit";
-import { persistReducer, persistStore } from "redux-persist";
-import { combineReducers } from "redux";
-import noteReducer from "./noteSlice";
+import { persistStore, persistReducer } from "redux-persist";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import noteReducer from "./slices/noteSlice";
 
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
 };
 
-const rootReducer = combineReducers({
-  notes: noteReducer,
-});
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, noteReducer);
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    notes: persistedReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // cần khi dùng persist
+      serializableCheck: {
+        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
+      },
     }),
 });
 

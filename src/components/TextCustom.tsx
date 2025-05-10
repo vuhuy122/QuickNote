@@ -1,12 +1,13 @@
 import React from "react";
 import { Text, TextProps, TextStyle } from "react-native";
+import { COLORS } from "../constants/colors";
 
 interface TextCustomProps extends TextProps {
   children: React.ReactNode;
   weight?: "regular" | "bold";
   size?: number;
   color?: string;
-  style?: TextStyle;
+  style?: TextStyle | TextStyle[] | undefined;
 }
 
 const fontMap = {
@@ -18,7 +19,7 @@ export default function TextCustom({
   children,
   weight = "regular",
   size = 16,
-  color = "#FFFFFF",
+  color = COLORS.white,
   style,
   ...rest
 }: TextCustomProps) {

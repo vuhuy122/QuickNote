@@ -1,8 +1,8 @@
-const icon_home = require("./home.png");
-const icon_home_active = require("./home_active.png");
-const icon_summary = require("./summary.png");
-const icon_summary_active = require("./summary_active.png");
-const icon_plus = require("./plus.png");
+const icon_home = require("./tabBar/home.png");
+const icon_home_active = require("./tabBar/home_active.png");
+const icon_summary = require("./tabBar/summary.png");
+const icon_summary_active = require("./tabBar/summary_active.png");
+const icon_plus = require("./tabBar/plus.png");
 
 export const tabBarIcons = {
   icon_home_active,
@@ -19,4 +19,25 @@ export const generalIcon = {
   icon_arrow,
   icon_setting,
   icon_robot,
+};
+
+const clock = require("./home/clock.png");
+const icon_pencel = require("./home/icon_pencel.png");
+const icon_bell = require("./home/icon_bell.png");
+const icon_health = require("./home/icon_health.png");
+
+export const homeIcon = {
+  clock,
+  icon_pencel,
+  icon_health,
+  icon_bell,
+};
+const icon_home_life = require("./summary/icon_home_life.png");
+const icon_work_nd_study = require("./summary/girl.png");
+const icon_health_and_wellness = require("./summary/icon_health_and_wellness.png");
+
+export const summary = {
+  icon_work_nd_study,
+  icon_health_and_wellness,
+  icon_home_life,
 };
