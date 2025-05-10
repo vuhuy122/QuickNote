@@ -7,6 +7,7 @@ import { Platform } from "react-native";
 import { ROUTER_NAMES } from "./Routers";
 import MyTabs from "./TabNavigation";
 import NewNote from "../screens/NewNote";
+import Settings from "../screens/Settings";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,12 +15,12 @@ export default function MainStackNavigation() {
   const configModalAndroid: NativeStackNavigationOptions =
     Platform.OS === "android"
       ? {
-          presentation: "modal",
+          presentation: "card",
           statusBarHidden: true,
           animation: "slide_from_bottom",
           gestureEnabled: true,
         }
-      : { presentation: "modal" };
+      : { presentation: "card" };
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -34,6 +35,13 @@ export default function MainStackNavigation() {
       <Stack.Screen
         name={ROUTER_NAMES.NEW_NOTE}
         component={NewNote}
+        options={{
+          ...configModalAndroid,
+        }}
+      />
+      <Stack.Screen
+        name={ROUTER_NAMES.SETTINGS}
+        component={Settings}
         options={{
           ...configModalAndroid,
         }}

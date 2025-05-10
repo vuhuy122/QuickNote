@@ -1,14 +1,11 @@
-import { View, Text } from "react-native";
 import React from "react";
+import Background from "../components/Background";
+import Header from "../components/Header";
 
-type Props = {};
-
-const Settings = (props: Props) => {
+export default function Settings() {
   return (
-    <View>
-      <Text>Settings</Text>
-    </View>
+    <Background>
+      <Header title="Settings" isShowBackBtn />
+    </Background>
   );
-};
-
-export default Settings;
+}

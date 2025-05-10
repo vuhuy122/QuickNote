@@ -5,4 +5,5 @@ export const ROUTER_NAMES = {
   SETTINGS: "Settings",
   MAIN_APP: "MainApp",
   MY_TAB: "MyTab",
+  CENTER_BUTTON: "CenterButton",
 };

@@ -1,15 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View, Text, Image, StyleSheet } from "react-native";
 import { RouteProp } from "@react-navigation/native";
-import Summary from "../screens/Summary";
+import { BlurView } from "expo-blur";
+import { Image } from "expo-image";
+import { StyleSheet, Text, View } from "react-native";
+import { tabBarIcons } from "../assets/Images";
 import Home from "../screens/Home";
 import NewNote from "../screens/NewNote";
-import { height, scale } from "../utils/scale";
+import Summary from "../screens/Summary";
+import { scale } from "../utils/scale";
 import { ROUTER_NAMES } from "./Routers";
-import { LinearGradient } from "expo-linear-gradient";
-import { BlurView } from "expo-blur";
-import { tabBarIcons } from "../assets/Images";
-import { navigate } from "./helper";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +19,7 @@ const TAB_ICONS = {
     iconActive: tabBarIcons.icon_home_active,
     label: "Home",
   },
-  [ROUTER_NAMES.NEW_NOTE]: {
+  [ROUTER_NAMES.CENTER_BUTTON]: {
     icon: tabBarIcons.icon_plus,
     iconActive: tabBarIcons.icon_plus,
     label: "New Note",
@@ -35,7 +34,7 @@ const TAB_ICONS = {
 // Function to create screen options for each tab
 const createScreenOptions = ({ route }: { route: RouteProp<any, string> }) => {
   const tabConfig = TAB_ICONS[route.name];
-  const isNewNoteTab = route.name === ROUTER_NAMES.NEW_NOTE;
+  const isNewNoteTab = route.name === ROUTER_NAMES.CENTER_BUTTON;
 
   return {
     headerShown: false,
@@ -58,7 +57,7 @@ const createScreenOptions = ({ route }: { route: RouteProp<any, string> }) => {
     tabBarLabel: ({ focused }: { focused: boolean }) =>
       !isNewNoteTab && (
         <Text
-          style={[styles.tabLabel, { color: focused ? "#FF5CA8" : "#fff" }]}
+          style={[styles.tabLabel, { color: focused ? "#F94695" : "#fff" }]}
         >
           {tabConfig.label}
         </Text>
@@ -73,15 +72,9 @@ function MyTabs() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: styles.tabBarStyle,
-        // Custom background for the tab bar
         tabBarBackground: () => (
           <BlurView style={styles.blurView}>
-            <LinearGradient
-              colors={["#19022E", "#3A0A5A"]}
-              style={styles.linearGradient}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-            />
+            <View style={styles.tabBarBackground} />
           </BlurView>
         ),
       }}
@@ -94,7 +87,7 @@ function MyTabs() {
       />
       {/* New Note Tab with custom tab press behavior */}
       <Tab.Screen
-        name={ROUTER_NAMES.NEW_NOTE}
+        name={ROUTER_NAMES.CENTER_BUTTON}
         component={NewNote} // or dummy component
         options={createScreenOptions}
         listeners={({ navigation }) => ({
@@ -136,13 +129,19 @@ const styles = StyleSheet.create({
     paddingTop: scale(25),
     position: "absolute",
     backgroundColor: "transparent",
+    borderTopLeftRadius: scale(20),
+    borderTopRightRadius: scale(20),
+    overflow: "hidden",
   },
   blurView: {
     flex: 1,
     overflow: "hidden",
   },
-  linearGradient: {
+  tabBarBackground: {
     flex: 1,
+    backgroundColor: "#210C3A",
+    borderTopLeftRadius: scale(20),
+    borderTopRightRadius: scale(20),
   },
 });
 
