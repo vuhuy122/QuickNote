@@ -18,7 +18,7 @@ const BlurViewBase: React.FC<BlurViewProps> = ({
   children,
   intensity = 42,
   style,
-  tint = Platform.OS === "android" ? "systemChromeMaterialDark" : "dark",
+  tint = "dark",
 }) => {
   return (
     <BlurView

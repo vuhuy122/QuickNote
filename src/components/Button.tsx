@@ -8,6 +8,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import TextCustom from "./TextCustom"; // Adjust the import according to your project
 import { scale } from "../utils/scale";
+import { COLORS } from "../constants/colors";
 
 // Define the types for the props
 interface ButtonProps {
@@ -30,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity onPress={onPress} disabled={disabled} style={style}>
       <LinearGradient
-        colors={["#F94695", "#F13A76"]}
+        colors={[COLORS.french_fuchsia, COLORS.cerise_pink]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0.2 }}
         style={styles.buttonGradient}

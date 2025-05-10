@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BlurView } from "expo-blur";
 import { scale } from "../utils/scale";
+import { COLORS } from "../constants/colors";
 
 type BackgroundProps = {
   children: React.ReactNode;
@@ -13,7 +14,12 @@ type BackgroundProps = {
 
 const Background: React.FC<BackgroundProps> = ({
   children,
-  colors = ["#1B284F", "#351159", "#421C45", "#3B184E"],
+  colors = [
+    COLORS.space_cadet,
+    COLORS.russian_violet,
+    COLORS.american_purple,
+    COLORS.russian_violet,
+  ],
   style,
 }) => {
   const insets = useSafeAreaInsets();

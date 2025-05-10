@@ -36,6 +36,7 @@ const TextInputCustom: React.FC<TextInputCustomProps> = ({
         style={styles.textInput}
         value={noteContent}
         onChangeText={handleTextChange}
+        textAlignVertical="top"
         placeholder={placeholder}
         placeholderTextColor={COLORS.white_opacity}
         multiline

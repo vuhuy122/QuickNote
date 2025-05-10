@@ -16,9 +16,11 @@ import { Category } from "../types/note";
 import { scale, width } from "../utils/scale";
 import Footer from "../components/Footer";
 
-export default function NewNote() {
+export default function NewNote(props?: any) {
+  const params = props?.route?.params;
+
   const dispatch = useDispatch<AppDispatch>();
-  const [content, setContent] = useState<string>("");
+  const [content, setContent] = useState<string>(props?.content || "");
   const [category, setCategory] = useState<Category>(CATEGORIES.WORK_STUDY);
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
@@ -84,15 +86,19 @@ export default function NewNote() {
 
   return (
     <Background>
-      <Header title="New note" isShowBackBtn />
+      <Header title={!params ? "New note" : "Note detail"} isShowBackBtn />
       <View style={styles.content}>
         {/* Category dropdown */}
-        <Dropdown categories={CATEGORY_LIST} onSelect={handleSelect} />
+        <Dropdown
+          categories={CATEGORY_LIST}
+          onSelect={handleSelect}
+          defaultValue={params?.category || ""}
+        />
         {/* Note input */}
         <TextInputCustom
           textInputStyle={styles.textInput}
           onChangeText={handleTextChange}
-          textInputDefaultValue=""
+          textInputDefaultValue={params?.content || ""}
         />
       </View>
       <Footer>

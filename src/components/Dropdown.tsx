@@ -7,6 +7,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  Pressable,
 } from "react-native";
 import Animated, {
   useSharedValue,
@@ -85,46 +86,45 @@ const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <BlurViewBase
-        intensity={42}
-        style={[styles.dropdownHeader, dropdownHeaderStyle]}
-      >
-        <TouchableOpacity
-          onPress={toggleDropdown}
-          style={styles.headerContainer}
+      <Pressable onPress={toggleDropdown}>
+        <BlurViewBase
+          intensity={42}
+          style={[styles.dropdownHeader, dropdownHeaderStyle]}
         >
-          {!!selectedValue ? (
-            <TextCustom
-              style={[
-                styles.headerText,
-                ...(headerTextStyle ? [headerTextStyle] : []),
-              ]}
-            >
-              {selectedValue}
-            </TextCustom>
-          ) : (
-            <TextCustom
-              style={[
-                styles.headerText,
-                {
-                  color: COLORS.white_opacity,
-                },
-              ]}
-            >
-              Choose a category
-            </TextCustom>
-          )}
-          <Animated.View style={arrowStyle}>
-            <Image
-              source={generalIcon.icon_arrow}
-              style={{
-                width: scale(8),
-                height: scale(16),
-              }}
-            />
-          </Animated.View>
-        </TouchableOpacity>
-      </BlurViewBase>
+          <View style={styles.headerContainer}>
+            {!!selectedValue ? (
+              <TextCustom
+                style={[
+                  styles.headerText,
+                  ...(headerTextStyle ? [headerTextStyle] : []),
+                ]}
+              >
+                {selectedValue}
+              </TextCustom>
+            ) : (
+              <TextCustom
+                style={[
+                  styles.headerText,
+                  {
+                    color: COLORS.white_opacity,
+                  },
+                ]}
+              >
+                Choose a category
+              </TextCustom>
+            )}
+            <Animated.View style={arrowStyle}>
+              <Image
+                source={generalIcon.icon_arrow}
+                style={{
+                  width: scale(8),
+                  height: scale(16),
+                }}
+              />
+            </Animated.View>
+          </View>
+        </BlurViewBase>
+      </Pressable>
       <Animated.View
         style={[styles.dropdownContent, animatedStyle, dropdownContentStyle]}
       >
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerText: {
-    color: "#fff",
+    color: COLORS.white,
     fontSize: scale(14),
     lineHeight: scale(16),
   },
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     borderTopColor: "rgba(255, 255, 255, 0.2)",
   },
   itemText: {
-    color: "#fff",
+    color: COLORS.white,
   },
 });
 
