@@ -9,10 +9,11 @@ import NewNote from "../screens/NewNote";
 import Summary from "../screens/Summary";
 import { scale } from "../utils/scale";
 import { ROUTER_NAMES } from "./Routers";
+import TextCustom from "../components/TextCustom";
 
 const Tab = createBottomTabNavigator();
 
-// Configuration for tab icons and labels
+// Tab icon and label configuration
 const TAB_ICONS = {
   [ROUTER_NAMES.HOME]: {
     icon: tabBarIcons.icon_home,
@@ -31,20 +32,20 @@ const TAB_ICONS = {
   },
 };
 
-// Function to create screen options for each tab
+// Generates screen options for each tab
 const createScreenOptions = ({ route }: { route: RouteProp<any, string> }) => {
   const tabConfig = TAB_ICONS[route.name];
   const isNewNoteTab = route.name === ROUTER_NAMES.CENTER_BUTTON;
 
   return {
     headerShown: false,
-    // Custom tab bar icon
+    // Custom tab icon
     tabBarIcon: ({ focused }: { focused: boolean }) => (
       <View style={styles.iconContainer}>
         <Image
+          contentFit="contain"
           source={focused ? tabConfig.iconActive : tabConfig.icon}
           style={[
-            styles.icon,
             {
               width: isNewNoteTab ? scale(36) : scale(50.29),
               height: isNewNoteTab ? scale(36) : scale(47),
@@ -53,14 +54,15 @@ const createScreenOptions = ({ route }: { route: RouteProp<any, string> }) => {
         />
       </View>
     ),
-    // Custom tab bar label
+    // Custom tab label (hidden for center button)
     tabBarLabel: ({ focused }: { focused: boolean }) =>
       !isNewNoteTab && (
-        <Text
-          style={[styles.tabLabel, { color: focused ? "#F94695" : "#fff" }]}
+        <TextCustom
+          weight="bold"
+          style={[styles.tabLabel, { color: focused ? "#F94695" : "#918DAC" }]}
         >
           {tabConfig.label}
-        </Text>
+        </TextCustom>
       ),
   };
 };
@@ -85,15 +87,15 @@ function MyTabs() {
         component={Home}
         options={createScreenOptions}
       />
-      {/* New Note Tab with custom tab press behavior */}
+      {/* Center Button (New Note) with custom navigation */}
       <Tab.Screen
         name={ROUTER_NAMES.CENTER_BUTTON}
-        component={NewNote} // or dummy component
+        component={NewNote}
         options={createScreenOptions}
         listeners={({ navigation }) => ({
           tabPress: (e) => {
-            e.preventDefault(); // prevent navigation
-            navigation.navigate(ROUTER_NAMES.NEW_NOTE);
+            e.preventDefault(); // Prevent default navigation
+            navigation.navigate(ROUTER_NAMES.NEW_NOTE); // Custom navigation
           },
         })}
       />
@@ -107,25 +109,22 @@ function MyTabs() {
   );
 }
 
-// Styles for the Tab Navigator and its components
+// Styles for Tab Navigator and its components
 const styles = StyleSheet.create({
   iconContainer: {
     justifyContent: "center",
     alignItems: "center",
   },
-  icon: {
-    resizeMode: "contain",
-  },
   tabLabel: {
-    fontSize: 12,
+    fontSize: scale(12),
     marginBottom: 5,
     textAlign: "center",
-    top: scale(15),
+    top: scale(14),
   },
   tabBarStyle: {
     height: scale(100),
     borderTopWidth: 0,
-    paddingBottom: 5,
+    paddingBottom: scale(5),
     paddingTop: scale(25),
     position: "absolute",
     backgroundColor: "transparent",
