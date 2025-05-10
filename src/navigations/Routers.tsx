@@ -6,4 +6,5 @@ export const ROUTER_NAMES = {
   MAIN_APP: "MainApp",
   MY_TAB: "MyTab",
   CENTER_BUTTON: "CenterButton",
+  CATEGORY_DETAIL: "CategoryDetail",
 };

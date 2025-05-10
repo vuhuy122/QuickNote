@@ -9,9 +9,11 @@ interface TextInputCustomProps {
   onChangeText?: (text: string) => void;
   textInputDefaultValue?: string;
   placeholder?: string;
+  editable?: boolean;
 }
 
 const TextInputCustom: React.FC<TextInputCustomProps> = ({
+  editable,
   textInputStyle,
   onChangeText,
   textInputDefaultValue = "Please input note content",
@@ -35,6 +37,7 @@ const TextInputCustom: React.FC<TextInputCustomProps> = ({
       <TextInput
         style={styles.textInput}
         value={noteContent}
+        editable={editable}
         onChangeText={handleTextChange}
         textAlignVertical="top"
         placeholder={placeholder}

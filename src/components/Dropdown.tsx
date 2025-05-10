@@ -34,6 +34,7 @@ interface DropdownProps {
   categories?: string[];
   onSelect?: (selectedValue: string) => void;
   defaultValue?: string;
+  disabled?: boolean;
 }
 
 const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
@@ -47,6 +48,7 @@ const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
   categories = [],
   onSelect,
   defaultValue,
+  disabled,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<string>(
@@ -86,7 +88,7 @@ const DropdownWithBackdropBlur: React.FC<DropdownProps> = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <Pressable onPress={toggleDropdown}>
+      <Pressable onPress={toggleDropdown} disabled={disabled}>
         <BlurViewBase
           intensity={42}
           style={[styles.dropdownHeader, dropdownHeaderStyle]}

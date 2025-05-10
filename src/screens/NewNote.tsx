@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { showMessage } from "react-native-flash-message";
@@ -13,17 +12,20 @@ import { CATEGORIES, CATEGORY_LIST } from "../constants/categories";
 import { AppDispatch } from "../store";
 import { addNote } from "../store/slices/noteSlice";
 import { Category } from "../types/note";
-import { scale, width } from "../utils/scale";
+import { scale } from "../utils/scale";
 import Footer from "../components/Footer";
 
 export default function NewNote(props?: any) {
+  // Extract navigation params if available
   const params = props?.route?.params;
 
   const dispatch = useDispatch<AppDispatch>();
+  const navigation = useNavigation();
+
+  // State for note content and category
   const [content, setContent] = useState<string>(props?.content || "");
   const [category, setCategory] = useState<Category>(CATEGORIES.WORK_STUDY);
   const [loading, setLoading] = useState(false);
-  const navigation = useNavigation();
 
   // Handle category selection from dropdown
   const handleSelect = (selectedValue: string) => {
@@ -38,7 +40,7 @@ export default function NewNote(props?: any) {
     setLoading(true);
 
     // Validate input
-    if (content.length === 0 || category.length === 0) {
+    if (!content.length || !category.length) {
       showMessage({
         description: "Note or category content cannot be empty",
         message: "Oops",
@@ -83,33 +85,39 @@ export default function NewNote(props?: any) {
       navigation.goBack();
     }, 2500);
   };
-
+  // console.log("props :>> ", props);
   return (
     <Background>
+      {/* Header */}
       <Header title={!params ? "New note" : "Note detail"} isShowBackBtn />
       <View style={styles.content}>
         {/* Category dropdown */}
         <Dropdown
           categories={CATEGORY_LIST}
           onSelect={handleSelect}
+          disabled={!!params?.category}
           defaultValue={params?.category || ""}
         />
         {/* Note input */}
         <TextInputCustom
           textInputStyle={styles.textInput}
+          editable={!params?.category}
           onChangeText={handleTextChange}
           textInputDefaultValue={params?.content || ""}
         />
       </View>
-      <Footer>
-        <Button
-          onPress={handleAddNote}
-          disabled={loading}
-          style={styles.saveButtonTouchable}
-        >
-          Save
-        </Button>
-      </Footer>
+      {/* Save button only shown when not viewing a note detail */}
+      {!params?.category && (
+        <Footer>
+          <Button
+            onPress={handleAddNote}
+            disabled={loading}
+            style={styles.saveButtonTouchable}
+          >
+            Save
+          </Button>
+        </Footer>
+      )}
     </Background>
   );
 }
@@ -123,7 +131,6 @@ const styles = StyleSheet.create({
     minHeight: scale(150),
     marginTop: scale(16),
   },
-
   saveButtonTouchable: {
     borderRadius: 99,
     overflow: "hidden",

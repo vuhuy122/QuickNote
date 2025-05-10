@@ -21,7 +21,7 @@ const ItemNote = (props: IProps) => {
   //   } `;
   // }
 
-  // Helper function to get the first 20 characters of the content
+  // Helper to get the first 20 characters of the content as required by the assignment
   function getFirst20Chars(content: string): string {
     const isTruncated = props?.content.length > 20;
     return `${content.slice(0, 20)}${isTruncated ? "..." : ""}`;

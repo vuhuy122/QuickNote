@@ -6,6 +6,8 @@ import Button from "../Button";
 import BlurViewBase from "../BlurViewBase";
 import { scale } from "../../utils/scale";
 import { COLORS } from "../../constants/colors";
+import { navigate } from "../../navigations/helper";
+import { ROUTER_NAMES } from "../../navigations/Routers";
 
 interface Props {
   icon: any;
@@ -21,7 +23,16 @@ export default function SummaryCategoryItem({ icon, name, count }: Props) {
           <Image source={icon} style={styles.icon} />
           <TextCustom style={styles.name}>{name}</TextCustom>
         </View>
-        <Button style={{ alignSelf: "center" }}>Detail</Button>
+        <Button
+          onPress={() =>
+            navigate(ROUTER_NAMES.CATEGORY_DETAIL, {
+              name,
+            })
+          }
+          style={{ alignSelf: "center" }}
+        >
+          Detail
+        </Button>
       </View>
       <BlurViewBase tint="dark" intensity={1} style={styles.blur}>
         <TextCustom style={styles.text}>

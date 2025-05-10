@@ -29,8 +29,8 @@ export default function ToastCustom({ props }: { props: IToastProps }) {
 
 const styles = StyleSheet.create({
   gradient: {
-    padding: 14,
-    borderRadius: 14,
+    padding: scale(16),
+    borderRadius: scale(14),
     alignItems: "center",
     justifyContent: "center",
     width: "90%",

@@ -1,17 +1,16 @@
-import React from "react";
-import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Image } from "expo-image";
+import React from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSelector } from "react-redux";
+import { generalIcon } from "../assets/Images";
 import Background from "../components/Background";
 import BlurViewBase from "../components/BlurViewBase";
-import TextCustom from "../components/TextCustom";
-import { generalIcon } from "../assets/Images";
-import { CATEGORY_META } from "../constants/categories";
-import { scale } from "../utils/scale";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
-import Button from "../components/Button";
 import SummaryCategoryItem from "../components/Summary/SummaryCategoryItem";
+import TextCustom from "../components/TextCustom";
+import { CATEGORY_META } from "../constants/categories";
+import { RootState } from "../store";
+import { scale } from "../utils/scale";
 
 export default function Summary() {
   const insets = useSafeAreaInsets();

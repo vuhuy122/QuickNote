@@ -17,6 +17,7 @@ type Props = {
 };
 
 const CategorySection = ({ icon, name, notes }: Props) => {
+  // Get up to three most recent notes, sorted by creation date (descending)
   const categoryNotes = (notes ?? [])
     .slice()
     .sort(
@@ -35,7 +36,7 @@ const CategorySection = ({ icon, name, notes }: Props) => {
         data={categoryNotes}
         renderItem={({ item }) => <ItemNote {...item} category={name} />}
         ItemSeparatorComponent={() => <View style={{ height: scale(10) }} />}
-        keyExtractor={(note) => note.id}
+        keyExtractor={(note) => note?.id}
         ListEmptyComponent={
           <TouchableOpacity onPress={() => navigate(ROUTER_NAMES.NEW_NOTE)}>
             <BlurViewBase>

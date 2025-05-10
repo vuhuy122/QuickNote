@@ -8,6 +8,7 @@ import { ROUTER_NAMES } from "./Routers";
 import MyTabs from "./TabNavigation";
 import NewNote from "../screens/NewNote";
 import Settings from "../screens/Settings";
+import CategoryDetail from "../screens/CategoryDetail";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,13 @@ export default function MainStackNavigation() {
       <Stack.Screen
         name={ROUTER_NAMES.SETTINGS}
         component={Settings}
+        options={{
+          ...configModalAndroid,
+        }}
+      />
+      <Stack.Screen
+        name={ROUTER_NAMES.CATEGORY_DETAIL}
+        component={CategoryDetail}
         options={{
           ...configModalAndroid,
         }}
